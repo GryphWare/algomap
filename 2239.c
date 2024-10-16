@@ -1,33 +1,27 @@
 #include <stdio.h>
-#include <limits.h>
-#include <stdlib.h>
+#include <math.h>
 
-int check (const int* arr, int size){
+int check (const int *nums, int size){
     
-    int distance = INT_MAX;
-    int different = INT_MAX;
+    int result = nums[0];
     
-    for (size_t i = 0; i < size; i++){
-       int mindistance = abs(arr[i] - 0);
-        
-        if(mindistance < different){
-            different = mindistance;
-            distance = arr[i];
-        } else if (mindistance == different && arr[i] > distance){
-            distance = arr[i];
+    for (size_t i = 1; i < size; i++){
+        if(abs(result) > abs(nums[i])){
+            result = nums[i];
+        } else if (abs(result) == abs(nums[i]) && nums[i] > result){
+            result = nums[i];
         }
     }
-    return distance;
+    return result;
 }
+
 int main() {
     
-    int arr_num[] = {-4,-2,1,4,8};
+    int nums[] = {-4,-2,-1, 1 ,4,8};
+    int size = sizeof(nums) / sizeof(nums[0]);
     
-    int size = sizeof(arr_num) / sizeof(arr_num[0]);
+    int largest = check(nums, size);
     
-    int result = check(arr_num, size);
-    
-    printf("%d", result);
-    
+    printf("%d", largest);
     return 0;
 }
